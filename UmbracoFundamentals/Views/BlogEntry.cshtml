@@ -1,0 +1,44 @@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.BlogEntryContentViewModel>
+@{
+	Layout = "childPage.cshtml";
+	string cssCurrent = "nav-current";
+}
+<section id="single-content" class="bg-white">
+    <div class="container">
+        <div class="section-content blog-content">
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2 mt-4">
+                    @Model.Content.Summary
+                    <hr />
+                    @if(Model.Content.Image != null)
+                    {
+                        var mediaCrop = Url.GetCropUrl(Model.Content.Image, "BlogHeader");
+                        <img src="@mediaCrop" alt="@Model.Content.Image.Name">
+                    }
+                    @Model.Content.BodyText
+                </div>
+                <div class="col-md-2 mt-4 align-self-start">
+                    You might also like:
+                    <ul class="side-nav">
+                        @foreach (var child in Model.Siblings())
+                        {
+                            <li>
+                                @if (Model.Name == child.Name)
+                                {
+                                    <a class="@cssCurrent" href="@child.Url()">@child.Name</a>
+                                }
+                                else
+                                {
+                                    <a href="@child.Url()">@child.Name</a>
+                                }
+
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

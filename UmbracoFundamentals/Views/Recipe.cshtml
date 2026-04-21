@@ -1,0 +1,42 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.RecipeContentViewModel>
+@using UmbracoFundamentals.Code
+@{
+	Layout = "childPage.cshtml";
+}
+<h1>
+	<span id="upvote-status">
+		@if (Model.Member.HasUpVoted)
+		{
+			<span>Upvoted&nbsp;👍 </span>
+		}
+	</span>
+	@Model.Content.Heading</h1>
+<div>
+	<p>@Model.Content.Intro</p>
+</div>
+<div>
+	<h2>Preparation</h2>
+	@Model.Content.Preparation
+</div>
+
+@if (Model.Member.IsLoggedIn && Model.Member.HasUpVoted is false)
+{
+	<button id="upvote-button" onclick="upvote()">👍</button>
+
+	@*This should probably be rendered in a section or loaded from a file instead of being inlined*@
+	<script>
+		const upvote = async function (){
+		 const response = await fetch("/umbraco/member-api/recipe/@Model.Key/upvote", {
+		   method: "POST"
+		 });
+		 if (response.ok)
+		 {
+		  const button = document.getElementById("upvote-button");
+		  button.parentNode.removeChild(button);
+
+		  document.getElementById('upvote-status').innerHTML = '👍';
+		 }
+		}
+	</script>
+}

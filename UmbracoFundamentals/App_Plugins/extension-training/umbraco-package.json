@@ -1,0 +1,75 @@
+{
+  "$schema": "../../umbraco-package-schema.json",
+  "name": "My.Extension",
+  "extensions": [
+    {
+      "type": "dashboard",
+      "alias": "dashboardtraining",
+      "name": "Dashboardtraining",
+      "element": "/App_Plugins/extension-training/dist/dashboardtraining.js",
+      "weight": 10,
+      "meta": {
+        "label": "This is my dashboard name",
+        "pathname": "this-is-the-dashboard-path"
+      },
+      "conditions": [
+        {
+          "alias": "Umb.Condition.SectionAlias",
+          "match": "Umb.Section.Content"
+        }
+      ]
+    },
+    {
+      "type": "icons",
+      "name": "Dashboard Icons",
+      "alias": "dashboard.icons",
+      "js": "/App_Plugins/extension-training/dist/icons-dictionary.js"
+    },
+    {
+      "type": "propertyEditorUi",
+      "alias": "My.PropertyEditorTraining",
+      "name": "My PropertyEditorTraining",
+      "element": "/App_Plugins/extension-training/dist/propertyeditortraining.js",
+      "meta": {
+        "propertyEditorSchemaAlias": "Umbraco.Plain.String",
+        "label": "My PropertyEditorTraining Label",
+        "icon": "icon-notepad",
+        "group": "Custom",
+        "settings": {
+          "properties": [
+            {
+              "alias": "disabled",
+              "label": "Disabled",
+              "description": "Disables the Umbaze button",
+              "propertyEditorUiAlias": "Umb.PropertyEditorUi.Toggle"
+            },
+            {
+              "alias": "placeholder",
+              "label": "Placeholder text",
+              "description": "Placeholder with a description to help out our editor",
+              "propertyEditorUiAlias": "Umb.PropertyEditorUi.TextBox"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "propertyEditorUi",
+      "alias": "My.AdvancedPropertyEditorTraining",
+      "name": "My AdvancedPropertyEditorTraining",
+      "element": "/App_Plugins/extension-training/dist/advancedpropertyeditortraining.js",
+      "meta": {
+        "propertyEditorSchemaAlias": "Umbraco.Plain.Json",
+        "label": "Advanced Property Editor ",
+        "icon": "icon-smiley",
+        "group": "Custom"
+      }
+    },
+    {
+      "type": "backofficeEntryPoint",
+      "alias": "exclude-gettingstarteddashboard",
+      "name": "Exclude Getting Started Dashboard",
+      "js": "/App_Plugins/extension-training/dist/exclude-gettingstarteddashboard.js"
+    }
+  ]
+}

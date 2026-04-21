@@ -1,0 +1,253 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.HomePageContentViewModel>
+@inject Umbraco.Cms.Web.Common.UmbracoHelper umbracoHelper
+@{
+    Layout = "master.cshtml";
+}
+
+<div class="jumbotron d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-1 mb-4">
+            @Model.Content.HighlightText
+        </h1>
+    </div>
+</div>
+<!-- Features Section-->
+<section id="features" class="bg-white">
+    <div class="container">
+        <div class="section-content">
+            <!-- Section Title -->
+            <div class="title-wrap mb-5">
+                <h2 class="section-title">
+                    @umbracoHelper.GetDictionaryValue("OurCourses")
+                </h2>
+                <p class="section-sub-title">@umbracoHelper.GetDictionaryValue("Whatwillitbe")</p>
+            </div>
+            <!-- End of Section Title -->
+            <div class="row">
+                <!-- Features Holder-->
+                <div class="col-md-10 offset-md-1 features-holder">
+                    <div class="row align-items-stretch align-content-stretch">
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/fundamentals-details/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-laptop fs-40"></i>
+                                    </div>
+                                    <h4>Fundamentals</h4>
+                                    <p>Learn how to build a basic site following the best practices</p>
+                                </a>
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded  feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/mvc-and-visual-studio-details/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-cog fs-40"></i>
+                                    </div>
+                                    <h4>MVC</h4>
+                                    <p>Leveraging the MVC nature of Umbraco to build custom features</p>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End of Feature Item -->
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12  text-center">
+                            <div class="shadow rounded  feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/cloud-developer/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-cloud fs-40"></i>
+                                    </div>
+
+                                    <h4>Cloud Developer</h4>
+                                    <p>Not sure where to host? Umbraco Cloud has got your back. Learn how to use it</p>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded  feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/load-balancing-and-azure/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-layers fs-40"></i>
+                                    </div>
+                                    <h4>Load Balancing</h4>
+                                    <p>The power of scalability right at your fingertips</p>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End of Feature Item -->
+                        <!-- Features Item -->
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded  feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/extending-the-backoffice-details/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-exit-up fs-40"></i>
+                                    </div>
+
+                                    <h4>Extending the Backoffice</h4>
+                                    <p>Hungry for backoffice customization? Custom editors, dashboards and more</p>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 col-sm-12 text-center">
+                            <div class="shadow rounded feature-item p-4 mb-4">
+                                <a href="https://umbraco.com/training/course-details/searching-and-indexing/" target="_blank">
+                                    <div class="my-4">
+                                        <i class="lnr lnr-map fs-40"></i>
+                                    </div>
+                                    <h4>Searching and Indexing</h4>
+                                    <p>Use Examine to build a dynamic and powerful search service for your website</p>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- End of Feature Item -->
+                    </div>
+                </div>
+                <!-- End of Features Holder-->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- End of Features Section-->
+<section class="overlay bg-fixed">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row align-items-center text-white">
+                        <div class="col-md-4 offset-md-2 col-sm-6">
+                            @if (Model.Value("yourName") != "" && Model.Value("yourName") != null) {
+                                <h4 class="mb-4">@Model.Value("yourName") proudly presents: this site!</h4>
+                            }
+                            else {
+                                <h4 class="mb-4">Your name could be here!</h4>
+                            }
+                            @if (Model.Value("yourDescription") != "" && Model.Value("yourDescription") != null) {
+                                <p>@Model.Value("yourDescription")</p>
+                            }
+                            else {
+                                <p>A few paragraphs about yourself, perhaps?</p>
+                            }
+                        </div>
+                        @if (Model.Value("yourBeautifulFace") != null) {
+                            var img = Model.Value<IPublishedContent>("yourBeautifulFace");
+                            <div class="col-md-4 offset-md-right-2 col-sm-6">
+                                <img class="my-5 img-circle" src="@img.Url()" alt="">
+                            </div>
+                        }
+                        else {
+                            <div class="col-md-4 offset-md-right-2 col-sm-6">
+                                <img class="my-5 img-circle" src="https://placehold.co/350x350" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End of Portfolio Section -->
+<!-- Testimonial Section-->
+<section id="testimonial" class="section-padding bg-fixed bg-white overlay">
+    <div class="container">
+        <div class="section-content">
+            <div class="heading-section text-center">
+                <h2>Testimonials</h2>
+            </div>
+            <div class="row">
+                <div class="testi-content testi-carousel owl-carousel">
+                    <div class="testi-item text-center">
+                        <i class="testi-icon fa fa-3x fa-quote-left"></i>
+                        <h4 class="testi-text">"With Umbraco, we can deliver digital business value for our customers quickly and efficiently through amazing websites and integrated digital ecosystems. The agility of the platform allows us to continuously increase conversion rates and improve experience, helping our customers become digital leaders."</h4>
+                        <div class="testi-meta-inner d-flex justify-content-center align-items-center">
+                            <div class="testi-img mr-2">
+                                <img src="https://placehold.co/50x50" alt="" />
+                            </div>
+                            <div class="testi-details">
+                                <p class="testi-author mb-0 font-weight-bolder">Andreas Rask Lundsgaard</p>
+                                <p class="testi-desc mb-0">Umbraco Gold Partner, Business Development Director at Pentia</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testi-item text-center">
+                        <i class="testi-icon fa fa-3x fa-quote-left"></i>
+                        <h4 class="testi-text">"The Umbraco Community is very unique. It's made of friendly people across the globe who are all passionate about the CMS and eager to learn and help each other. Everyone gets a chance to contribute in their own way and suggest changes to improve the project. It's fair to say that the community is at the heart of Umbraco."</h4>
+                        <div class="testi-meta-inner d-flex justify-content-center align-items-center">
+                            <div class="testi-img mr-2">
+                                <img src="https://umbraco.com/media/4mnhb4aw/poornima.jpg?quality=80" alt="" />
+                            </div>
+                            <div class="testi-details">
+                                <p class="testi-author mb-0 font-weight-bolder">Poornima Nayar</p>
+                                <p class="testi-desc mb-0">Umbraco Community Member, Freelance Develope</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testi-item text-center">
+                        <i class="testi-icon fa fa-3x fa-quote-left"></i>
+                        <h4 class="testi-text">"Providing helpful and friendly support to our users truly brings a smile to my face. Whether itÃ¢â‚¬â„¢s through the chat or by demo-ing our products in a webinar, every day I talk to people from all over the world - guiding them and hearing all about the great things theyÃ¢â‚¬â„¢re building with Umbraco."</h4>
+                        <div class="testi-meta-inner d-flex justify-content-center align-items-center">
+                            <div class="testi-img mr-2">
+                                <img src="https://placehold.co/50x50" alt="" />
+                            </div>
+                            <div class="testi-details">
+                                <p class="testi-author mb-0 font-weight-bolder">JJ</p>
+                                <p class="testi-desc mb-0">Umbraco Customer Experience, Umbraco HQ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="client" class="overlay bg-fixed">
+    <div class="container">
+        <div class="section-content">
+            <div class="row ">
+                <div class="col-md-12">
+
+                    <div class="title-wrap mb-5 above">
+                        <h2>Our partners</h2>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12 client-holder">
+
+                    <div class="client-slider owl-carousel">
+
+                        @if (Model.Value("companyLogos") != null && Model.Value<IEnumerable<IPublishedContent>>("companyLogos").Any()) {
+
+                            foreach (var logo in Model.Value<IEnumerable<IPublishedContent>>("companyLogos")) {
+                                <div class="client-item">
+                                    <img class="img-responsive" src="@logo.Url()" alt=" ">
+                                </div>
+                            }
+                        }
+                        else {
+                            <div class="client-item">
+                                <!-- Alternatively you could do Umbraco.Media(Guid.Parse("b8dc67f9b88e4d79acf2246ffcc77d09")) to get a media item but the picker approach is safer -->
+                                @if (Model.Value<IEnumerable<IPublishedContent>>("umbracoLogos") != null && Model.Value<IEnumerable<IPublishedContent>>("umbracoLogos").Any()) {
+                                    var imgLogo = Model.Value<IEnumerable<IPublishedContent>>("umbracoLogos").FirstOrDefault();
+                                    <img class="img-responsive" src="@imgLogo.Url()" alt=" ">
+                                }
+                                else {
+                                    <img class="img-responsive" src="https://placehold.co/200x200" alt=" ">
+                                }
+                            </div>
+                        }
+                    </div>
+                    <!-- End of Client Holder -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

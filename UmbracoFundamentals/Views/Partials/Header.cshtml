@@ -1,0 +1,16 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    string imgSource = "";
+    string title = Model.Name;
+    if(Model.Value("backgroundImage") != null){
+    imgSource= Model.Value<IPublishedContent>("backgroundImage").Url();
+    }
+    if(Model.Value("headerTitle") != null && Model.Value("headerTitle") != ""){
+    title = Model.Value("headerTitle").ToString();
+    }
+}
+<div class="jumbotron jumbotron-small jumbotron-single d-flex align-items-center" style="background-image: url(@imgSource);">
+  <div class="container text-center">
+    <h1 class="display-2 mb-4">@title</h1>
+  </div>
+</div>

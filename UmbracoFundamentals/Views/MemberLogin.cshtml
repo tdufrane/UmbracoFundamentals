@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Common.Security
+@using Umbraco.Cms.Web.Website.Controllers
+@inject IMemberExternalLoginProviders memberExternalLoginProviders
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.SiteViewModel>
+@{
+	Layout = "childPage.cshtml";
+	var loginModel = new LoginModel();
+    // You can modify this to redirect to a different URL instead of the current one
+    loginModel.RedirectUrl = null;
+}
+<div class="login-form">
+    @using (Html.BeginUmbracoForm<UmbLoginController>(
+                "HandleLogin", new { RedirectUrl = loginModel.RedirectUrl }))
+    {
+        <h4>Log into your account</h4>
+        <hr/>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="@loginModel.Username" class="form-label"></label>
+            <input asp-for="@loginModel.Username" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="@loginModel.Password" class="form-label"></label>
+            <input asp-for="@loginModel.Password" class="form-control"/>
+        </div>
+        <div class="mb-3 form-check">
+            <input asp-for="@loginModel.RememberMe" class="form-check-input">
+            <label asp-for="@loginModel.RememberMe" class="form-check-label">
+                @Html.DisplayNameFor(m => loginModel.RememberMe)
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Log in</button>
+    }
+</div>

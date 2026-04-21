@@ -1,0 +1,12 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+   var review = (ContentModels.Review)Model.Content;
+}
+ 
+   <div class="review"> 
+       <div class="review-content">
+           <h3 class="review-title">@review.PersonName</h3>
+           <p class="review-text no-air">@review.Quote</p>
+       </div>
+   </div>

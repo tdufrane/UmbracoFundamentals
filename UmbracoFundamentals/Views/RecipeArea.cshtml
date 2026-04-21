@@ -1,0 +1,40 @@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.RecipeAreaContentViewModel>
+@using UmbracoFundamentals.Code
+@{
+    Layout = "childPage.cshtml";
+    var items = Model.Children<Recipe>()?.Take(3) ?? Enumerable.Empty<Recipe>();
+}
+<h1>@(Model.Content.Title ?? Model.Name)</h1>
+<div>
+    @Model.Content.Text
+</div>
+<div class="recipe-showcase">
+    <h3>Most popular items</h3>
+    <div class="recipe-cards">
+        @foreach (var recipe in items)
+        {
+            var itemName = recipe.ListTitle.IsNullOrWhiteSpace() == false
+            ? recipe.ListTitle
+            : recipe.Title.IsNullOrWhiteSpace() == false
+            ? recipe.Title
+            : recipe.Name;
+            var description = recipe.ListDescription.IsNullOrWhiteSpace() == false
+            ? recipe.ListDescription
+            : recipe.Intro?.ShortenTo100WithDots();
+
+            <div class="recipe-card">
+                <a href="@recipe.Url()">
+                    <h4>@itemName</h4>
+                    <div>
+                        @if (recipe.ListImage != null)
+                        {
+                            <img src="@recipe.ListImage.Url()" alt="@recipe.ListImage.Name" />
+                        }
+                        <p>@description</p>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

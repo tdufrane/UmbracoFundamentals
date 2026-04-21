@@ -1,0 +1,18 @@
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.SiteViewModel>
+@{
+ Layout = "childPage.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/blockGridLayout.css")" />
+
+<section class="bg-white">
+    <div class="container">
+        <div class="section-content">
+            @await Html.GetBlockGridHtmlAsync(Model, "productGrid")
+            <br/>
+            <h3>Customer reviews</h3>
+            @await Html.GetBlockListHtmlAsync(Model, "Reviews")
+        </div>
+    </div>
+</section>

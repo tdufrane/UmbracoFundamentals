@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.SiteViewModel>
+@using UmbracoFundamentals.Code
+@using UmbracoFundamentals.Controllers
+@{
+	Layout = "childPage.cshtml";
+	var recipeSubmitModel = new RecipeSubmitModel();
+}
+@if (TempData["FormSuccess"] is true)
+{
+	<div class="recipe-from-success">
+		 Thank you for submitting your amazing recipe! #h5YR 
+		<a href="@Model.Url()">Submit another recipe</a>
+	</div>
+}
+else
+{
+	<div class="recipe-form">
+		@using (Html.BeginUmbracoForm<RecipeSuggestionController>("HandleSubmitRecipe"))
+		{
+			<h4>Submit a recipe</h4>
+			<hr />
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div>
+				<label asp-for="@recipeSubmitModel.Name" class="form-label"></label>
+				<input asp-for="@recipeSubmitModel.Name" class="form-control" />
+			</div>
+			<div>
+				<label asp-for="@recipeSubmitModel.Intro" class="form-label"></label>
+				<input asp-for="@recipeSubmitModel.Intro" class="form-control" />
+			</div>
+			<div>
+				<label asp-for="@recipeSubmitModel.Preparation" class="form-label"></label>
+				<input asp-for="@recipeSubmitModel.Preparation" class="form-control" />
+			</div>
+			<div>
+				<label asp-for="@recipeSubmitModel.ListImage" class="form-label"></label>
+				<input asp-for="@recipeSubmitModel.ListImage" class="form-control" />
+			</div>
+			<div>
+				<label asp-for="@recipeSubmitModel.SourceConfirmation" class="form-label">
+					I confirm that all sources have been noted and no copyright laws have been broken to obtain this recipe
+				</label>
+				<input asp-for="@recipeSubmitModel.SourceConfirmation" class="form-control" />
+			</div>
+
+			<button type="submit" class="btn btn-primary">Suggest my amazing recipe!</button>
+		}
+	</div>
+}

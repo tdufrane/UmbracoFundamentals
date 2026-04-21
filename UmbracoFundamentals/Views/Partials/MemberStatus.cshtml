@@ -1,0 +1,27 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Web.Common.Models
+@using Umbraco.Cms.Web.Website.Controllers
+@using Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
+    var logoutModel = new PostRedirectModel();
+    // You can modify this to redirect to a different URL instead of the current one
+    logoutModel.RedirectUrl = null;
+}
+
+<div class="login-status">
+    @if (isLoggedIn)
+    {
+        <span>Logged in as <strong>@Context?.User?.Identity?.Name</strong></span>
+
+        @using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", new { RedirectUrl = logoutModel.RedirectUrl }))
+        {
+            <button type="submit" class="btn btn-primary">Log out</button>
+        }
+    }
+    else
+    {
+        <a href="@(Model.AncestorsOrSelf<HomePage>().First().FirstChild<MemberArea>()?.Url() ?? "#")">Log in</a>
+    }
+</div>

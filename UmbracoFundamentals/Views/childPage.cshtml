@@ -1,0 +1,19 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<UmbracoFundamentals.Code.SiteViewModel>
+@{
+	Layout = "master.cshtml";
+}
+@await Html.PartialAsync("Header")
+@await Html.PartialAsync("MemberStatus")
+@RenderBody()
+<section class="bg-fixed overlay">
+    <div class="container">
+        <div class="section-content">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="mb-2"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
